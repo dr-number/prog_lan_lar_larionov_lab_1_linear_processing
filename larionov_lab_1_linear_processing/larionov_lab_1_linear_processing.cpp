@@ -23,6 +23,13 @@ enum ConsoleColor
     White = 15
 };
 
+string GetLine() {
+    string line;
+    getline(cin, line);
+    cin.clear();
+    return line;
+}
+
 class MyInput {
 
     public: 
@@ -37,7 +44,8 @@ class MyInput {
 
                 SetConsoleTextAttribute(handleConsole, White);
                 cout << text;
-                cin >> xStr;
+
+                xStr = GetLine();
 
                 try {
                     result = stod(xStr.c_str());
@@ -92,8 +100,7 @@ class MyRandom {
         bool isRandomData() {
             cout << "Сгенерировать данные случайным образом [y/n]?" << endl;
 
-            string answer;
-            getline(cin, answer);
+            string answer = GetLine();
 
             transform(answer.begin(), answer.end(), answer.begin(), tolower);
 
@@ -325,6 +332,7 @@ class Task16 {
             SetConsoleTextAttribute(handleConsole, White);
 
             bool isGo = true;
+            string select;
 
             while (isGo)
             {
@@ -335,8 +343,7 @@ class Task16 {
                 cout << "2) По сторонам и углу между ними" << endl;
                 cout << "3) По диагоналям и углу между ними" << endl << endl;
 
-                string select;
-                getline(cin, select);
+                select = GetLine();
 
                 if (select == "1") {
                     InitSideHeight();
@@ -375,12 +382,13 @@ int main()
 
     while (isGo)
     {
+
         cout << "\nВведите номер задачи" << endl;
         cout << "6) Вычислить объём полого цилиндра" << endl;
         cout << "16) Вычислить площадь параллелограмма" << endl;
         cout << "Для выхода введите \"0\": ";
 
-        getline(cin, select);
+        select = GetLine();
       
         if (select == "6") {
             Task6 task6 = *new Task6();
