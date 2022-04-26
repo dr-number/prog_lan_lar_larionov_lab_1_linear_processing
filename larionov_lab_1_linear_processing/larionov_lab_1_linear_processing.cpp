@@ -65,7 +65,7 @@ class MyRandom {
             cout << "Сгенерировать данные случайным образом [y/n]?" << endl;
 
             string answer;
-            getline(cin.ignore(), answer);
+            getline(cin, answer);
 
             transform(answer.begin(), answer.end(), answer.begin(), tolower);
 
@@ -218,13 +218,13 @@ class Task16 {
             else {
                 MyInput myInput = *new MyInput();
                 side = myInput.InputData("Введите сторону параллелограмма: ");
-                height = myInput.InputData("Введите высоту параллелограмма : ");
+                height = myInput.InputData("Введите высоту параллелограмма: ");
             }
 
             SetConsoleTextAttribute(handleConsole, Yellow);
             cout << "Полученные данные:" << endl;
             cout << "Сторона параллелограмма (a): " << side << endl;
-            cout << "Высота параллелограмма: (h)" << height << endl;
+            cout << "Высота параллелограмма: (h): " << height << endl << endl;
 
             SetConsoleTextAttribute(handleConsole, Green);
             printSquare(side, height);
@@ -254,7 +254,7 @@ class Task16 {
             cout << "Полученные данные:" << endl;
             cout << "Первая сторона параллелограмма (а): " << side1 << endl;
             cout << "Вторая сторона параллелограмма (b): " << side2 << endl;
-            cout << "Угол между сторонами а и b (A) : " << corner << endl;
+            cout << "Угол между сторонами а и b (A): " << corner << endl << endl;
 
             SetConsoleTextAttribute(handleConsole, Green);
             printSquareCorner(side1, side2, corner);
@@ -262,7 +262,7 @@ class Task16 {
             SetConsoleTextAttribute(handleConsole, White);
         }
 
-        void InitSidesDiagonals() { ///!!!
+        void InitSidesDiagonals() {
 
             double d1, d2, corner;
 
@@ -284,7 +284,7 @@ class Task16 {
             cout << "Полученные данные:" << endl;
             cout << "Первая диагональ параллелограмма (d1): " << d1 << endl;
             cout << "Вторая диагональ параллелограмма (d2): " << d2 << endl;
-            cout << "Угол между диагоналями d1 и d2 (A) : " << corner << endl;
+            cout << "Угол между диагоналями d1 и d2 (A): " << corner << endl << endl;
 
             SetConsoleTextAttribute(handleConsole, Green);
             printSquareDiagonals(d1, d2, corner);
@@ -301,10 +301,11 @@ class Task16 {
             while (isGo)
             {
                 cout << "\nВычислить S (площадь) параллелограмма" << endl;
-                cout << "По какой формуле проводить вычисления:" << endl;
+                cout << "По какой формуле проводить вычисления:" << endl << endl;
+
                 cout << "1) По стороне и высоте" << endl;
                 cout << "2) По сторонам и углу между ними" << endl;
-                cout << "3) По диагоналям и углу между ними" << endl;
+                cout << "3) По диагоналям и углу между ними" << endl << endl;
 
                 string selectStr;
                 getline(cin, selectStr);
@@ -367,12 +368,10 @@ int main()
             task6.Init();
             break;
 
-            /*
         case 16:
-            Task7 task7 = new Task7();
-            task7.init();
+            Task16 task16 = *new Task16();
+            task16.Init();
             break;
-            */
      
         case 0:
             isGo = false;
