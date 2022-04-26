@@ -196,6 +196,11 @@ class Task6 {
 class Task16 {
 
     private:
+        double degreeToRadian(double degree) {
+
+            return (degree * PI) / 180;
+        }
+
         double printSquare(double side, double height) {
             
             cout << "S = a * h" << endl;
@@ -210,15 +215,15 @@ class Task16 {
         double printSquareCorner(double side1, double side2, double corner) {
 
             cout << "S = a * b * sin(A)" << endl;
-            cout << "S = " << side1 << " * " << side2 << " * sin(" << corner << ")" << endl;
+            cout << "S = " << fixed << side1 << " * " << fixed << side2 << " * sin(" << fixed << corner << ")" << endl;
 
-            double sinCorner = sin(corner);
+            double sinCorner = sin(degreeToRadian(corner));
 
-            cout << "S = " << side1 << " * " << side2 << " * " << sinCorner << endl;
+            cout << "S = " << fixed << side1 << " * " << fixed << side2 << " * " << fixed << sinCorner << endl;
 
             double result = side1 * side2 * sinCorner;
 
-            cout << "S = " << result << endl;
+            cout << "S = " << fixed << result << endl;
 
             return result;
         }
@@ -226,15 +231,15 @@ class Task16 {
         double printSquareDiagonals(double d1, double d2, double corner) {
 
             cout << "S = 0.5 * d1 * d2 * sin(A)" << endl;
-            cout << "S = 0.5 * " << d1 << " * " << d2 << " * sin(" << corner << ")" << endl;
+            cout << "S = 0.5 * " << fixed << d1 << " * " << fixed << d2 << " * sin(" << fixed << corner << ")" << endl;
 
-            double sinCorner = sin(corner);
+            double sinCorner = sin(degreeToRadian(corner));
 
-            cout << "S = 0.5 * " << d1 << " * " << d2 << " * " << sinCorner << endl;
+            cout << "S = 0.5 * " << fixed << d1 << " * " << fixed << d2 << " * " << fixed << sinCorner << endl;
 
             double result = (d1 * d2 * sinCorner) / 2;
 
-            cout << "S = " << result << endl;
+            cout << "S = " << fixed << result << endl;
 
             return result;
         }
@@ -282,14 +287,14 @@ class Task16 {
                 MyInput myInput = *new MyInput();
                 side1 = myInput.InputData("Введите первую сторону параллелограмма (а): ");
                 side2 = myInput.InputData("Введите вторую сторону параллелограмма (b): ");
-                corner = myInput.InputCorner("Введите угол между сторонами а и b (A): ", "A", 90);
+                corner = myInput.InputCorner("Введите угол между сторонами а и b (A) [в градусах]: ", "A", 90);
             }
 
             SetConsoleTextAttribute(handleConsole, Yellow);
             cout << endl << "Полученные данные:" << endl;
             cout << "Первая сторона параллелограмма (а): " << side1 << endl;
             cout << "Вторая сторона параллелограмма (b): " << side2 << endl;
-            cout << "Угол между сторонами а и b (A): " << corner << endl << endl;
+            cout << "Угол между сторонами а и b (A) [в градусах]: " << corner << endl << endl;
 
             SetConsoleTextAttribute(handleConsole, Green);
             printSquareCorner(side1, side2, corner);
