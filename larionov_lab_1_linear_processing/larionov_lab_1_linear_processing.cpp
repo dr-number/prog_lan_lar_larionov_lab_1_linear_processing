@@ -343,14 +343,16 @@ int main()
     handleConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     setlocale(LC_ALL, "Russian");
 
-    cout << "Тема 1. Линейные вычислительные  процессы\n";
-    cout << "Ларионов Никита Юрьевич. гр. 110з\n";
+    cout << "Тема 1. Линейные вычислительные  процессы" << endl;
+    cout << "Ларионов Никита Юрьевич. гр. 110з" << endl;
 
     bool isGo = true;
 
     while (isGo)
     {
-        cout << "\nВведите номер задачи \"6\", \"16\"\n";
+        cout << "\nВведите номер задачи" << endl;
+        cout << "6) Вычислить объём полого цилиндра" << endl;
+        cout << "16) Вычислить площадь параллелограмма" << endl;
         cout << "Для выхода введите \"0\": ";
 
         string selectStr;
