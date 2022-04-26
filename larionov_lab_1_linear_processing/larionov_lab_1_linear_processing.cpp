@@ -35,18 +35,19 @@ class MyInput {
             double x = 0;
 
             while (true) {
+                SetConsoleTextAttribute(handleConsole, White);
                 cout << text;
 
                 cin >> xStr;
-                isNumber = isalpha(atoi(xStr.c_str()));
+                isNumber = !isalpha(atoi(xStr.c_str()));
 
                 if (!isNumber){
                     SetConsoleTextAttribute(handleConsole, Red);
-                    cout << xStr + " - не число!";
+                    cout << xStr + " - не число!" << endl;
                 }
                 else if(atof(xStr.c_str()) <= 0) {
                     SetConsoleTextAttribute(handleConsole, Red);
-                    cout << "Число должно быть больше нуля!";
+                    cout << "Число должно быть больше нуля!" << endl;
                 }
                 else
                     break;
@@ -127,14 +128,14 @@ class Task6 {
                 h = myInput.InputData("Введите высоту цилиндра: ");
 
                 while (true) {
-                    SetConsoleTextAttribute(handle, 37);
+                    SetConsoleTextAttribute(handle, White);
 
                     r1 = myInput.InputData("Введите внешний радиус цилиндра: ");
                     r2 = myInput.InputData("Введите внутренний радиус цилиндра: ");
 
                     if (r1 <= r2) {
                         SetConsoleTextAttribute(handle, 4);
-                        cout << "Внешний радиус цилиндра должен быть больше внутреннего!";
+                        cout << endl << "Внешний радиус цилиндра должен быть больше внутреннего!" << endl;
                     }
                     else
                         break;
@@ -143,7 +144,7 @@ class Task6 {
             }
 
             SetConsoleTextAttribute(handleConsole, Yellow);
-            cout << "Полученные данные:" << endl;
+            cout << endl << "Полученные данные:" << endl;
             cout << "Высота цилиндра (h): " << h << endl;
             cout << "Внешний радиус цилиндра (r1): " << r1 << endl;
             cout << "Внутренний радиус цилиндра (r2): " << r2 << endl << endl;
@@ -307,29 +308,22 @@ class Task16 {
                 cout << "2) По сторонам и углу между ними" << endl;
                 cout << "3) По диагоналям и углу между ними" << endl << endl;
 
-                string selectStr;
-                getline(cin, selectStr);
+                string select;
+                getline(cin, select);
 
-                int select = atoi(selectStr.c_str());
-
-                switch (select) {
-
-                case 1:
+                if (select == "1") {
                     InitSideHeight();
                     isGo = false;
-                    break;
-
-                case 2:
+                }
+                else if (select == "2") {
                     InitSidesCorner();
                     isGo = false;
-                    break;
-
-                case 3:
+                }
+                else if (select == "3") {
                     InitSidesDiagonals();
                     isGo = false;
-                    break;
-
-                default:
+                }
+                else {
                     SetConsoleTextAttribute(handleConsole, Red);
                     cout << "\nНекорректные данные!" << endl;
                     SetConsoleTextAttribute(handleConsole, White);
@@ -344,10 +338,13 @@ int main()
     handleConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     setlocale(LC_ALL, "Russian");
 
+    SetConsoleTextAttribute(handleConsole, White);
+
     cout << "Тема 1. Линейные вычислительные  процессы" << endl;
     cout << "Ларионов Никита Юрьевич. гр. 110з" << endl;
 
     bool isGo = true;
+    string select;
 
     while (isGo)
     {
@@ -356,34 +353,25 @@ int main()
         cout << "16) Вычислить площадь параллелограмма" << endl;
         cout << "Для выхода введите \"0\": ";
 
-        string selectStr;
-        getline(cin, selectStr);
-
-        int select = atoi(selectStr.c_str());
-
-        switch (select) {
-
-        case 6:
+        getline(cin, select);
+      
+        if (select == "6") {
             Task6 task6 = *new Task6();
             task6.Init();
-            break;
-
-        case 16:
+        }
+        else if (select == "16") {
             Task16 task16 = *new Task16();
             task16.Init();
-            break;
-     
-        case 0:
+        } 
+        else if (select == "0") {
             isGo = false;
-            break;
-
-        default:
+        }
+        else {
             SetConsoleTextAttribute(handleConsole, Red);
             cout << "\nНекорректные данные!" << endl;
             SetConsoleTextAttribute(handleConsole, White);
-            break;
-
         }
+
     }
 }
 
