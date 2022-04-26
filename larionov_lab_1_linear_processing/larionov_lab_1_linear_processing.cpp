@@ -30,31 +30,58 @@ class MyInput {
         double InputData(string text){
 
             string xStr = "";
-
-            bool isNumber = false;
-            double x = 0;
+            double x = 0, result = 0;
+            bool isNumber = true;
 
             while (true) {
+
                 SetConsoleTextAttribute(handleConsole, White);
                 cout << text;
-
                 cin >> xStr;
-                isNumber = !isalpha(atoi(xStr.c_str()));
+
+                try {
+                    result = stod(xStr.c_str());
+                    isNumber = true;
+                } 
+                catch (...) {
+                    isNumber = false;
+                }
 
                 if (!isNumber){
                     SetConsoleTextAttribute(handleConsole, Red);
-                    cout << xStr + " - не число!" << endl;
+                    cout << endl << xStr + " - не число!" << endl << endl;
                 }
-                else if(atof(xStr.c_str()) <= 0) {
+                else if(result <= 0) {
                     SetConsoleTextAttribute(handleConsole, Red);
-                    cout << "Число должно быть больше нуля!" << endl;
+                    cout << endl << "Число должно быть больше нуля!" << endl << endl;
                 }
                 else
                     break;
             }
 
-            return atof(xStr.c_str());
+            return result;
     }
+
+    double InputCorner(string text, string cornerName, double stopCorner) {
+
+        double corner = 0;
+        MyInput myInput = *new MyInput();
+
+        while (true) {
+            corner = myInput.InputData(text);
+
+            if (corner >= stopCorner) {
+                SetConsoleTextAttribute(handleConsole, Red);
+                cout << endl << "Угол " << cornerName << " должен быть меньше " << stopCorner << " градусов! " << endl << endl;
+                SetConsoleTextAttribute(handleConsole, White);
+            }
+            else
+                break;
+        }
+
+        return corner;
+    }
+
 };
 
 class MyRandom {
@@ -223,7 +250,7 @@ class Task16 {
             }
 
             SetConsoleTextAttribute(handleConsole, Yellow);
-            cout << "Полученные данные:" << endl;
+            cout << endl << "Полученные данные:" << endl;
             cout << "Сторона параллелограмма (a): " << side << endl;
             cout << "Высота параллелограмма: (h): " << height << endl << endl;
 
@@ -248,11 +275,11 @@ class Task16 {
                 MyInput myInput = *new MyInput();
                 side1 = myInput.InputData("Введите первую сторону параллелограмма (а): ");
                 side2 = myInput.InputData("Введите вторую сторону параллелограмма (b): ");
-                corner = myInput.InputData("Введите угол между сторонами а и b (A): ");
+                corner = myInput.InputCorner("Введите угол между сторонами а и b (A): ", "A", 90);
             }
 
             SetConsoleTextAttribute(handleConsole, Yellow);
-            cout << "Полученные данные:" << endl;
+            cout << endl << "Полученные данные:" << endl;
             cout << "Первая сторона параллелограмма (а): " << side1 << endl;
             cout << "Вторая сторона параллелограмма (b): " << side2 << endl;
             cout << "Угол между сторонами а и b (A): " << corner << endl << endl;
@@ -272,17 +299,17 @@ class Task16 {
             if (myRandom.isRandomData()) {
                 d1 = myRandom.GetRandom(myRandom.MIN_RANDOM, myRandom.MAX_RANDOM);
                 d2 = myRandom.GetRandom(myRandom.MIN_RANDOM, myRandom.MAX_RANDOM);
-                corner = myRandom.GetRandom(myRandom.MIN_RANDOM, 89);
+                corner = myRandom.GetRandom(myRandom.MIN_RANDOM, 179);
             }
             else {
                 MyInput myInput = *new MyInput();
                 d1 = myInput.InputData("Введите первую диагональ параллелограмма (d1): ");
                 d2 = myInput.InputData("Введите вторую дигональ параллелограмма (d2): ");
-                corner = myInput.InputData("Введите угол между диагоналями d1 и d2 (A): ");
+                corner = myInput.InputCorner("Введите угол между диагоналями d1 и d2 (A): ", "A", 180);
             }
 
             SetConsoleTextAttribute(handleConsole, Yellow);
-            cout << "Полученные данные:" << endl;
+            cout << endl << "Полученные данные:" << endl;
             cout << "Первая диагональ параллелограмма (d1): " << d1 << endl;
             cout << "Вторая диагональ параллелограмма (d2): " << d2 << endl;
             cout << "Угол между диагоналями d1 и d2 (A): " << corner << endl << endl;
