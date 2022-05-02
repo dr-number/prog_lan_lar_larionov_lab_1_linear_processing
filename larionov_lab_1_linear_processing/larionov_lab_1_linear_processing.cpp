@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <cmath>
-#include <regex>
+//#include <regex>
 
 #define PI 3.14159265
 
