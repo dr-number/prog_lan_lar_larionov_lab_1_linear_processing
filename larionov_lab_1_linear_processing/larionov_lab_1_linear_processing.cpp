@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <Windows.h>
 #include <string>
 #include <stdlib.h>
@@ -57,11 +57,11 @@ class MyInput {
 
                 if (!isNumber){
                     SetConsoleTextAttribute(handleConsole, Red);
-                    cout << endl << xStr + " - íå ÷èñëî!" << endl << endl;
+                    cout << endl << xStr + " - Ð½Ðµ Ñ‡Ð¸ÑÐ»Ð¾!" << endl << endl;
                 }
                 else if(result <= 0) {
                     SetConsoleTextAttribute(handleConsole, Red);
-                    cout << endl << "×èñëî äîëæíî áûòü áîëüøå íóëÿ!" << endl << endl;
+                    cout << endl << "Ð§Ð¸ÑÐ»Ð¾ Ð´Ð¾Ð»Ð¶Ð½Ð¾ Ð±Ñ‹Ñ‚ÑŒ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð½ÑƒÐ»Ñ!" << endl << endl;
                 }
                 else
                     break;
@@ -80,7 +80,7 @@ class MyInput {
 
             if (corner >= stopCorner) {
                 SetConsoleTextAttribute(handleConsole, Red);
-                cout << endl << "Óãîë " << cornerName << " äîëæåí áûòü ìåíüøå " << stopCorner << " ãðàäóñîâ! " << endl << endl;
+                cout << endl << "Ð£Ð³Ð¾Ð» " << cornerName << " Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð±Ñ‹Ñ‚ÑŒ Ð¼ÐµÐ½ÑŒÑˆÐµ " << stopCorner << " Ð³Ñ€Ð°Ð´ÑƒÑÐ¾Ð²! " << endl << endl;
                 SetConsoleTextAttribute(handleConsole, White);
             }
             else
@@ -98,7 +98,7 @@ class MyRandom {
         double MIN_RANDOM = 2, MAX_RANDOM = 1000;
 
         bool isRandomData() {
-            cout << "Ñãåíåðèðîâàòü äàííûå ñëó÷àéíûì îáðàçîì [y/n]?" << endl;
+            cout << "Ð¡Ð³ÐµÐ½ÐµÑ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð´Ð°Ð½Ð½Ñ‹Ðµ ÑÐ»ÑƒÑ‡Ð°Ð¹Ð½Ñ‹Ð¼ Ð¾Ð±Ñ€Ð°Ð·Ð¾Ð¼ [y/n]?" << endl;
 
             string answer = GetLine();
 
@@ -118,7 +118,7 @@ class Task6 {
     private:
         double printVolume(double h, double r1, double r2) {
 
-            cout << "v = ÏÈ * h (r1^2 - r2^2)" << endl;
+            cout << "v = ÐŸÐ˜ * h (r1^2 - r2^2)" << endl;
             cout << "v = " << PI << " * " << h << "(" << fixed << r1 <<"^2 - " << fixed << r2 << "^2)" << endl;
 
             double square1 = r1 * r1;
@@ -134,18 +134,20 @@ class Task6 {
             return result;
         }
 
+
     public:
+
         void Init() {
 
             HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
             SetConsoleTextAttribute(handleConsole, White);
 
-            cout << "\nÂû÷èñëèòü v (îáú¸ì) ïîëîãî öèëèíäðà" << endl;
-            cout << "âûñîòîé h" << endl;
-            cout << "âíåøíèì ðàäèóñîì r1" << endl;
-            cout << "âíóòðåííèì ðàäèóñîì r2" << endl << endl;
+            cout << "\nÐ’Ñ‹Ñ‡Ð¸ÑÐ»Ð¸Ñ‚ÑŒ v (Ð¾Ð±ÑŠÑ‘Ð¼) Ð¿Ð¾Ð»Ð¾Ð³Ð¾ Ñ†Ð¸Ð»Ð¸Ð½Ð´Ñ€Ð°\n";
+            cout << "Ð²Ñ‹ÑÐ¾Ñ‚Ð¾Ð¹ h\n";
+            cout << "Ð²Ð½ÐµÑˆÐ½Ð¸Ð¼ Ñ€Ð°Ð´Ð¸ÑƒÑÐ¾Ð¼ r1\n";
+            cout << "Ð²Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ð¼ Ñ€Ð°Ð´Ð¸ÑƒÑÐ¾Ð¼ r2\n\n";
 
-            cout << "Ïî ôîðìóëå: v = ÏÈ * h (r1^2 - r2^2)" << endl << endl;
+            cout << "ÐŸÐ¾ Ñ„Ð¾Ñ€Ð¼ÑƒÐ»Ðµ: v = ÐŸÐ˜ * h (r1^2 - r2^2)\n\n";
 
             double r1, r2, h;
 
@@ -159,17 +161,17 @@ class Task6 {
             else {
                 MyInput myInput = *new MyInput();
 
-                h = myInput.InputData("Ââåäèòå âûñîòó öèëèíäðà: ");
+                h = myInput.InputData("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ñ‹ÑÐ¾Ñ‚Ñƒ Ñ†Ð¸Ð»Ð¸Ð½Ð´Ñ€Ð°: ");
 
                 while (true) {
                     SetConsoleTextAttribute(handle, White);
 
-                    r1 = myInput.InputData("Ââåäèòå âíåøíèé ðàäèóñ öèëèíäðà: ");
-                    r2 = myInput.InputData("Ââåäèòå âíóòðåííèé ðàäèóñ öèëèíäðà: ");
+                    r1 = myInput.InputData("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ð½ÐµÑˆÐ½Ð¸Ð¹ Ñ€Ð°Ð´Ð¸ÑƒÑ Ñ†Ð¸Ð»Ð¸Ð½Ð´Ñ€Ð°: ");
+                    r2 = myInput.InputData("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ð¹ Ñ€Ð°Ð´Ð¸ÑƒÑ Ñ†Ð¸Ð»Ð¸Ð½Ð´Ñ€Ð°: ");
 
                     if (r1 <= r2) {
                         SetConsoleTextAttribute(handle, 4);
-                        cout << endl << "Âíåøíèé ðàäèóñ öèëèíäðà äîëæåí áûòü áîëüøå âíóòðåííåãî!" << endl;
+                        cout << endl << "Ð’Ð½ÐµÑˆÐ½Ð¸Ð¹ Ñ€Ð°Ð´Ð¸ÑƒÑ Ñ†Ð¸Ð»Ð¸Ð½Ð´Ñ€Ð° Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð±Ñ‹Ñ‚ÑŒ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð²Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½ÐµÐ³Ð¾!" << endl;
                     }
                     else
                         break;
@@ -178,10 +180,10 @@ class Task6 {
             }
 
             SetConsoleTextAttribute(handleConsole, Yellow);
-            cout << endl << "Ïîëó÷åííûå äàííûå:" << endl;
-            cout << "Âûñîòà öèëèíäðà (h): " << h << endl;
-            cout << "Âíåøíèé ðàäèóñ öèëèíäðà (r1): " << r1 << endl;
-            cout << "Âíóòðåííèé ðàäèóñ öèëèíäðà (r2): " << r2 << endl << endl;
+            cout << endl << "ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ:" << endl;
+            cout << "Ð’Ñ‹ÑÐ¾Ñ‚Ð° Ñ†Ð¸Ð»Ð¸Ð½Ð´Ñ€Ð° (h): " << h << endl;
+            cout << "Ð’Ð½ÐµÑˆÐ½Ð¸Ð¹ Ñ€Ð°Ð´Ð¸ÑƒÑ Ñ†Ð¸Ð»Ð¸Ð½Ð´Ñ€Ð° (r1): " << r1 << endl;
+            cout << "Ð’Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ð¹ Ñ€Ð°Ð´Ð¸ÑƒÑ Ñ†Ð¸Ð»Ð¸Ð½Ð´Ñ€Ð° (r2): " << r2 << endl << endl;
 
 
             SetConsoleTextAttribute(handleConsole, Green);
@@ -257,14 +259,14 @@ class Task16 {
             }
             else {
                 MyInput myInput = *new MyInput();
-                side = myInput.InputData("Ââåäèòå ñòîðîíó ïàðàëëåëîãðàììà: ");
-                height = myInput.InputData("Ââåäèòå âûñîòó ïàðàëëåëîãðàììà: ");
+                side = myInput.InputData("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ñƒ Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð°: ");
+                height = myInput.InputData("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ñ‹ÑÐ¾Ñ‚Ñƒ Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð°: ");
             }
 
             SetConsoleTextAttribute(handleConsole, Yellow);
-            cout << endl << "Ïîëó÷åííûå äàííûå:" << endl;
-            cout << "Ñòîðîíà ïàðàëëåëîãðàììà (a): " << side << endl;
-            cout << "Âûñîòà ïàðàëëåëîãðàììà: (h): " << height << endl << endl;
+            cout << endl << "ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ:" << endl;
+            cout << "Ð¡Ñ‚Ð¾Ñ€Ð¾Ð½Ð° Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð° (a): " << side << endl;
+            cout << "Ð’Ñ‹ÑÐ¾Ñ‚Ð° Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð°: (h): " << height << endl << endl;
 
             SetConsoleTextAttribute(handleConsole, Green);
             printSquare(side, height);
@@ -285,16 +287,16 @@ class Task16 {
             }
             else {
                 MyInput myInput = *new MyInput();
-                side1 = myInput.InputData("Ââåäèòå ïåðâóþ ñòîðîíó ïàðàëëåëîãðàììà (à): ");
-                side2 = myInput.InputData("Ââåäèòå âòîðóþ ñòîðîíó ïàðàëëåëîãðàììà (b): ");
-                corner = myInput.InputCorner("Ââåäèòå óãîë ìåæäó ñòîðîíàìè à è b (A) [â ãðàäóñàõ]: ", "A", 90);
+                side1 = myInput.InputData("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿ÐµÑ€Ð²ÑƒÑŽ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ñƒ Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð° (Ð°): ");
+                side2 = myInput.InputData("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ñ‚Ð¾Ñ€ÑƒÑŽ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ñƒ Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð° (b): ");
+                corner = myInput.InputCorner("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑƒÐ³Ð¾Ð» Ð¼ÐµÐ¶Ð´Ñƒ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ð°Ð¼Ð¸ Ð° Ð¸ b (A) [Ð² Ð³Ñ€Ð°Ð´ÑƒÑÐ°Ñ…]: ", "A", 90);
             }
 
             SetConsoleTextAttribute(handleConsole, Yellow);
-            cout << endl << "Ïîëó÷åííûå äàííûå:" << endl;
-            cout << "Ïåðâàÿ ñòîðîíà ïàðàëëåëîãðàììà (à): " << side1 << endl;
-            cout << "Âòîðàÿ ñòîðîíà ïàðàëëåëîãðàììà (b): " << side2 << endl;
-            cout << "Óãîë ìåæäó ñòîðîíàìè à è b (A) [â ãðàäóñàõ]: " << corner << endl << endl;
+            cout << endl << "ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ:" << endl;
+            cout << "ÐŸÐµÑ€Ð²Ð°Ñ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ð° Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð° (Ð°): " << side1 << endl;
+            cout << "Ð’Ñ‚Ð¾Ñ€Ð°Ñ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ð° Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð° (b): " << side2 << endl;
+            cout << "Ð£Ð³Ð¾Ð» Ð¼ÐµÐ¶Ð´Ñƒ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ð°Ð¼Ð¸ Ð° Ð¸ b (A) [Ð² Ð³Ñ€Ð°Ð´ÑƒÑÐ°Ñ…]: " << corner << endl << endl;
 
             SetConsoleTextAttribute(handleConsole, Green);
             printSquareCorner(side1, side2, corner);
@@ -315,16 +317,16 @@ class Task16 {
             }
             else {
                 MyInput myInput = *new MyInput();
-                d1 = myInput.InputData("Ââåäèòå ïåðâóþ äèàãîíàëü ïàðàëëåëîãðàììà (d1): ");
-                d2 = myInput.InputData("Ââåäèòå âòîðóþ äèãîíàëü ïàðàëëåëîãðàììà (d2): ");
-                corner = myInput.InputCorner("Ââåäèòå óãîë ìåæäó äèàãîíàëÿìè d1 è d2 (A): ", "A", 180);
+                d1 = myInput.InputData("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿ÐµÑ€Ð²ÑƒÑŽ Ð´Ð¸Ð°Ð³Ð¾Ð½Ð°Ð»ÑŒ Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð° (d1): ");
+                d2 = myInput.InputData("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ñ‚Ð¾Ñ€ÑƒÑŽ Ð´Ð¸Ð³Ð¾Ð½Ð°Ð»ÑŒ Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð° (d2): ");
+                corner = myInput.InputCorner("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑƒÐ³Ð¾Ð» Ð¼ÐµÐ¶Ð´Ñƒ Ð´Ð¸Ð°Ð³Ð¾Ð½Ð°Ð»ÑÐ¼Ð¸ d1 Ð¸ d2 (A): ", "A", 180);
             }
 
             SetConsoleTextAttribute(handleConsole, Yellow);
-            cout << endl << "Ïîëó÷åííûå äàííûå:" << endl;
-            cout << "Ïåðâàÿ äèàãîíàëü ïàðàëëåëîãðàììà (d1): " << d1 << endl;
-            cout << "Âòîðàÿ äèàãîíàëü ïàðàëëåëîãðàììà (d2): " << d2 << endl;
-            cout << "Óãîë ìåæäó äèàãîíàëÿìè d1 è d2 (A): " << corner << endl << endl;
+            cout << endl << "ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ:" << endl;
+            cout << "ÐŸÐµÑ€Ð²Ð°Ñ Ð´Ð¸Ð°Ð³Ð¾Ð½Ð°Ð»ÑŒ Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð° (d1): " << d1 << endl;
+            cout << "Ð’Ñ‚Ð¾Ñ€Ð°Ñ Ð´Ð¸Ð°Ð³Ð¾Ð½Ð°Ð»ÑŒ Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð° (d2): " << d2 << endl;
+            cout << "Ð£Ð³Ð¾Ð» Ð¼ÐµÐ¶Ð´Ñƒ Ð´Ð¸Ð°Ð³Ð¾Ð½Ð°Ð»ÑÐ¼Ð¸ d1 Ð¸ d2 (A): " << corner << endl << endl;
 
             SetConsoleTextAttribute(handleConsole, Green);
             printSquareDiagonals(d1, d2, corner);
@@ -341,12 +343,12 @@ class Task16 {
 
             while (isGo)
             {
-                cout << "\nÂû÷èñëèòü S (ïëîùàäü) ïàðàëëåëîãðàììà" << endl;
-                cout << "Ïî êàêîé ôîðìóëå ïðîâîäèòü âû÷èñëåíèÿ:" << endl << endl;
+                cout << "\nÐ’Ñ‹Ñ‡Ð¸ÑÐ»Ð¸Ñ‚ÑŒ S (Ð¿Ð»Ð¾Ñ‰Ð°Ð´ÑŒ) Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð°" << endl;
+                cout << "ÐŸÐ¾ ÐºÐ°ÐºÐ¾Ð¹ Ñ„Ð¾Ñ€Ð¼ÑƒÐ»Ðµ Ð¿Ñ€Ð¾Ð²Ð¾Ð´Ð¸Ñ‚ÑŒ Ð²Ñ‹Ñ‡Ð¸ÑÐ»ÐµÐ½Ð¸Ñ:" << endl << endl;
 
-                cout << "1) Ïî ñòîðîíå è âûñîòå" << endl;
-                cout << "2) Ïî ñòîðîíàì è óãëó ìåæäó íèìè" << endl;
-                cout << "3) Ïî äèàãîíàëÿì è óãëó ìåæäó íèìè" << endl << endl;
+                cout << "1) ÐŸÐ¾ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ðµ Ð¸ Ð²Ñ‹ÑÐ¾Ñ‚Ðµ" << endl;
+                cout << "2) ÐŸÐ¾ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ð°Ð¼ Ð¸ ÑƒÐ³Ð»Ñƒ Ð¼ÐµÐ¶Ð´Ñƒ Ð½Ð¸Ð¼Ð¸" << endl;
+                cout << "3) ÐŸÐ¾ Ð´Ð¸Ð°Ð³Ð¾Ð½Ð°Ð»ÑÐ¼ Ð¸ ÑƒÐ³Ð»Ñƒ Ð¼ÐµÐ¶Ð´Ñƒ Ð½Ð¸Ð¼Ð¸" << endl << endl;
 
                 select = GetLine();
 
@@ -364,7 +366,7 @@ class Task16 {
                 }
                 else {
                     SetConsoleTextAttribute(handleConsole, Red);
-                    cout << "\nÍåêîððåêòíûå äàííûå!" << endl;
+                    cout << "\nÐÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ!" << endl;
                     SetConsoleTextAttribute(handleConsole, White);
                     break;
                 }
@@ -379,8 +381,8 @@ int main()
 
     SetConsoleTextAttribute(handleConsole, White);
 
-    cout << "Òåìà 1. Ëèíåéíûå âû÷èñëèòåëüíûå  ïðîöåññû" << endl;
-    cout << "Ëàðèîíîâ Íèêèòà Þðüåâè÷. ãð. 110ç" << endl;
+    cout << "Ð¢ÐµÐ¼Ð° 1. Ð›Ð¸Ð½ÐµÐ¹Ð½Ñ‹Ðµ Ð²Ñ‹Ñ‡Ð¸ÑÐ»Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ  Ð¿Ñ€Ð¾Ñ†ÐµÑÑÑ‹" << endl;
+    cout << "Ð›Ð°Ñ€Ð¸Ð¾Ð½Ð¾Ð² ÐÐ¸ÐºÐ¸Ñ‚Ð° Ð®Ñ€ÑŒÐµÐ²Ð¸Ñ‡. Ð³Ñ€. 110Ð·" << endl;
 
     bool isGo = true;
     string select;
@@ -388,10 +390,10 @@ int main()
     while (isGo)
     {
 
-        cout << "\nÂâåäèòå íîìåð çàäà÷è" << endl;
-        cout << "6) Âû÷èñëèòü îáú¸ì ïîëîãî öèëèíäðà" << endl;
-        cout << "16) Âû÷èñëèòü ïëîùàäü ïàðàëëåëîãðàììà" << endl;
-        cout << "Äëÿ âûõîäà ââåäèòå \"0\": ";
+        cout << "\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ Ð·Ð°Ð´Ð°Ñ‡Ð¸" << endl;
+        cout << "6) Ð’Ñ‹Ñ‡Ð¸ÑÐ»Ð¸Ñ‚ÑŒ v (Ð¾Ð±ÑŠÑ‘Ð¼) Ð¿Ð¾Ð»Ð¾Ð³Ð¾ Ñ†Ð¸Ð»Ð¸Ð½Ð´Ñ€Ð°" << endl;
+        cout << "16) Ð’Ñ‹Ñ‡Ð¸ÑÐ»Ð¸Ñ‚ÑŒ Ð¿Ð»Ð¾Ñ‰Ð°Ð´ÑŒ Ð¿Ð°Ñ€Ð°Ð»Ð»ÐµÐ»Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð°" << endl;
+        cout << "Ð”Ð»Ñ Ð²Ñ‹Ñ…Ð¾Ð´Ð° Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ \"0\": ";
 
         select = GetLine();
       
@@ -408,7 +410,7 @@ int main()
         }
         else {
             SetConsoleTextAttribute(handleConsole, Red);
-            cout << "\nÍåêîððåêòíûå äàííûå!" << endl;
+            cout << "\nÐÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ!" << endl;
             SetConsoleTextAttribute(handleConsole, White);
         }
 
