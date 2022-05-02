@@ -34,10 +34,14 @@ class MyInput {
 
     public: 
 
-        double InputData(string text){
+        bool isDouble(string str) {
+            return str.find_first_not_of("-1234567890,") == string::npos;
+        }
+
+        double InputData(string text, int min, int max, int defaultValue = -1) {
 
             string xStr = "";
-            double x = 0, result = 0;
+            double result = 0;
             bool isNumber = true;
 
             while (true) {
@@ -47,55 +51,39 @@ class MyInput {
 
                 xStr = GetLine();
 
+                if (xStr == "" && defaultValue != -1)
+                    return defaultValue;
+
+
                 try {
                     result = stod(xStr.c_str());
                     isNumber = true;
-                } 
+                }
                 catch (...) {
                     isNumber = false;
                 }
 
-                if (!isNumber){
+                if (!(isNumber && isDouble(xStr))) {
                     SetConsoleTextAttribute(handleConsole, Red);
                     cout << endl << xStr + " - не число!" << endl << endl;
                 }
-                else if(result <= 0) {
+                else if (result > max || result < min) {
                     SetConsoleTextAttribute(handleConsole, Red);
-                    cout << endl << "Число должно быть больше нуля!" << endl << endl;
+                    cout << endl << "Число должно лежать в промежутке [" << min << "; " << max << "]!" << endl << endl;
                 }
                 else
                     break;
             }
 
             return result;
-    }
-
-    double InputCorner(string text, string cornerName, double stopCorner) {
-
-        double corner = 0;
-        MyInput myInput = *new MyInput();
-
-        while (true) {
-            corner = myInput.InputData(text);
-
-            if (corner >= stopCorner) {
-                SetConsoleTextAttribute(handleConsole, Red);
-                cout << endl << "Угол " << cornerName << " должен быть меньше " << stopCorner << " градусов! " << endl << endl;
-                SetConsoleTextAttribute(handleConsole, White);
-            }
-            else
-                break;
         }
-
-        return corner;
-    }
 
 };
 
 class MyRandom {
     
     public:
-        double MIN_RANDOM = 2, MAX_RANDOM = 1000;
+        static const int MIN_RANDOM = 2, MAX_RANDOM = 1000;
 
         bool isRandomData() {
             cout << "Сгенерировать данные случайным образом [y/n]?" << endl;
@@ -108,8 +96,19 @@ class MyRandom {
         }
 
         double GetRandom(int min, int max) {
-            return rand() % (max - min) - min;
+
+            random_device random_device; // Источник энтропии.
+            mt19937 generator(random_device()); // Генератор случайных чисел.
+
+            // (Здесь берется одно инициализирующее значение, можно брать больше)
+            uniform_int_distribution<> distribution(min, max); // Равномерное распределение [min, max]
+
+            return distribution(generator);
+
+            //return rand() % (max - min) - min;
+            //return rand() % max + min;
         }
+
 
 };
 
@@ -119,12 +118,12 @@ class Task6 {
         double printVolume(double h, double r1, double r2) {
 
             cout << "v = ПИ * h (r1^2 - r2^2)" << endl;
-            cout << "v = " << PI << " * " << h << "(" << fixed << r1 <<"^2 - " << fixed << r2 << "^2)" << endl;
+            cout << "v = " << PI << " * " << h << " * (" << fixed << r1 <<"^2 - " << fixed << r2 << "^2)" << endl;
 
             double square1 = r1 * r1;
             double square2 = r2 * r2;
 
-            cout << "v = " << PI << " * " << h << " (" << fixed << square1 << " - " << fixed << square2 << ")" << endl;
+            cout << "v = " << PI << " * " << h << " * (" << fixed << square1 << " - " << fixed << square2 << ")" << endl;
 
             double differenceSquare = square1 - square2;
             cout << "v = " << PI << " * " << fixed << h << " * " << fixed << differenceSquare << endl;
@@ -136,6 +135,8 @@ class Task6 {
 
 
     public:
+        const int MIN = MyRandom::MIN_RANDOM;
+        const int MAX = MyRandom::MAX_RANDOM;
 
         void Init() {
 
@@ -149,28 +150,35 @@ class Task6 {
 
             cout << "По формуле: v = ПИ * h (r1^2 - r2^2)\n\n";
 
+            
             double r1, r2, h;
 
             MyRandom myRandom = *new MyRandom();
             
             if (myRandom.isRandomData()) {
-                r2 = myRandom.GetRandom(myRandom.MIN_RANDOM, myRandom.MAX_RANDOM) - 1;
-                r1 = myRandom.GetRandom(r2, myRandom.MAX_RANDOM);
-                h =  myRandom.GetRandom(myRandom.MIN_RANDOM, myRandom.MAX_RANDOM);
+                h =  myRandom.GetRandom(MIN, MAX);
+
+                while (true) {
+                    r2 = myRandom.GetRandom(MIN, MAX) - 1;
+                    r1 = myRandom.GetRandom(r2, MAX);
+
+                    if (r1 > r2)
+                        break;
+                }
             }
             else {
                 MyInput myInput = *new MyInput();
 
-                h = myInput.InputData("Введите высоту цилиндра: ");
+                h = myInput.InputData("Введите высоту цилиндра: ", MIN, MAX);
 
                 while (true) {
                     SetConsoleTextAttribute(handle, White);
 
-                    r1 = myInput.InputData("Введите внешний радиус цилиндра: ");
-                    r2 = myInput.InputData("Введите внутренний радиус цилиндра: ");
+                    r1 = myInput.InputData("Введите внешний радиус цилиндра: ", MIN, MAX);
+                    r2 = myInput.InputData("Введите внутренний радиус цилиндра: ", MIN, MAX);
 
                     if (r1 <= r2) {
-                        SetConsoleTextAttribute(handle, 4);
+                        SetConsoleTextAttribute(handle, Red);
                         cout << endl << "Внешний радиус цилиндра должен быть больше внутреннего!" << endl;
                     }
                     else
@@ -247,6 +255,9 @@ class Task16 {
         }
 
     public:
+        const int MIN = MyRandom::MIN_RANDOM;
+        const int MAX = MyRandom::MAX_RANDOM;
+
         void InitSideHeight() {
 
             double side, height;
@@ -254,13 +265,13 @@ class Task16 {
             MyRandom myRandom = *new MyRandom();
 
             if (myRandom.isRandomData()) {
-                side = myRandom.GetRandom(myRandom.MIN_RANDOM, myRandom.MAX_RANDOM);
-                height = myRandom.GetRandom(myRandom.MIN_RANDOM, myRandom.MAX_RANDOM);
+                side = myRandom.GetRandom(MIN, MAX);
+                height = myRandom.GetRandom(MIN, MAX);
             }
             else {
                 MyInput myInput = *new MyInput();
-                side = myInput.InputData("Введите сторону параллелограмма: ");
-                height = myInput.InputData("Введите высоту параллелограмма: ");
+                side = myInput.InputData("Введите сторону параллелограмма: ", MIN, MAX);
+                height = myInput.InputData("Введите высоту параллелограмма: ", MIN, MAX);
             }
 
             SetConsoleTextAttribute(handleConsole, Yellow);
@@ -281,15 +292,15 @@ class Task16 {
             MyRandom myRandom = *new MyRandom();
 
             if (myRandom.isRandomData()) {
-                side1 = myRandom.GetRandom(myRandom.MIN_RANDOM, myRandom.MAX_RANDOM);
-                side2 = myRandom.GetRandom(myRandom.MIN_RANDOM, myRandom.MAX_RANDOM);
-                corner = myRandom.GetRandom(myRandom.MIN_RANDOM, 89);
+                side1 = myRandom.GetRandom(MIN, MAX);
+                side2 = myRandom.GetRandom(MIN, MAX);
+                corner = myRandom.GetRandom(MIN, 89);
             }
             else {
                 MyInput myInput = *new MyInput();
-                side1 = myInput.InputData("Введите первую сторону параллелограмма (а): ");
-                side2 = myInput.InputData("Введите вторую сторону параллелограмма (b): ");
-                corner = myInput.InputCorner("Введите угол между сторонами а и b (A) [в градусах]: ", "A", 90);
+                side1 = myInput.InputData("Введите первую сторону параллелограмма (а): ", MIN, MAX);
+                side2 = myInput.InputData("Введите вторую сторону параллелограмма (b): ", MIN, MAX);
+                corner = myInput.InputData("Введите угол между сторонами а и b (A) [в градусах]: ", MIN, 90);
             }
 
             SetConsoleTextAttribute(handleConsole, Yellow);
@@ -311,15 +322,15 @@ class Task16 {
             MyRandom myRandom = *new MyRandom();
 
             if (myRandom.isRandomData()) {
-                d1 = myRandom.GetRandom(myRandom.MIN_RANDOM, myRandom.MAX_RANDOM);
-                d2 = myRandom.GetRandom(myRandom.MIN_RANDOM, myRandom.MAX_RANDOM);
-                corner = myRandom.GetRandom(myRandom.MIN_RANDOM, 179);
+                d1 = myRandom.GetRandom(MIN, MAX);
+                d2 = myRandom.GetRandom(MIN, MAX);
+                corner = myRandom.GetRandom(MIN, 179);
             }
             else {
                 MyInput myInput = *new MyInput();
-                d1 = myInput.InputData("Введите первую диагональ параллелограмма (d1): ");
-                d2 = myInput.InputData("Введите вторую дигональ параллелограмма (d2): ");
-                corner = myInput.InputCorner("Введите угол между диагоналями d1 и d2 (A): ", "A", 180);
+                d1 = myInput.InputData("Введите первую диагональ параллелограмма (d1): ", MIN, MAX);
+                d2 = myInput.InputData("Введите вторую дигональ параллелограмма (d2): ", MIN, MAX);
+                corner = myInput.InputData("Введите угол между диагоналями d1 и d2 (A): ", MIN, 180);
             }
 
             SetConsoleTextAttribute(handleConsole, Yellow);
