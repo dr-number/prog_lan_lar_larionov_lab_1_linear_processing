@@ -176,7 +176,7 @@ class Task6 {
 
     private:
         const int MIN = MyRandom::MIN_RANDOM;
-        const int MAX = MyRandom::MAX_RANDOM;
+        const int MAX = 100;
 
         double printVolume(double h, double r1, double r2) {
 
@@ -279,45 +279,53 @@ class Task16 {
             return (degree * PI) / 180;
         }
 
+        double radianToDegree(double radian) {
+            return (radian * 180) / PI;
+        }
+
         double printSquare(double side, double height) {
             
             cout << "S = a * h" << endl;
-            cout << "S = " << side << " * " << height << endl;
+            cout << "S = " << RoundStr(side) << " * " << RoundStr(height) << endl;
             
-            double result = side * height;
-            cout << "S = " << result << endl;
+            double result = Round(side * height);
+            cout << "S = " << RoundStr(result) << endl;
 
             return result;
         }
 
         double printSquareCorner(double side1, double side2, double corner) {
 
+            string strSide1 = RoundStr(side1);
+            string strSide2 = RoundStr(side2);
+
             cout << "S = a * b * sin(A)" << endl;
-            cout << "S = " << fixed << side1 << " * " << fixed << side2 << " * sin(" << fixed << corner << ")" << endl;
+            cout << "S = " << fixed << strSide1 << " * " << fixed << strSide2 << " * sin(" << fixed << RoundStr(corner) << ")" << endl;
 
             double sinCorner = sin(degreeToRadian(corner));
 
-            cout << "S = " << fixed << side1 << " * " << fixed << side2 << " * " << fixed << sinCorner << endl;
+            cout << "S = " << fixed << strSide1 << " * " << fixed << strSide2 << " * " << fixed << RoundStr(sinCorner) << endl;
 
-            double result = side1 * side2 * sinCorner;
+            double result = Round(side1 * side2 * sinCorner);
 
-            cout << "S = " << fixed << result << endl;
+            cout << "S = " << fixed << RoundStr(result) << endl;
 
             return result;
         }
 
         double printSquareDiagonals(double d1, double d2, double corner) {
 
-            cout << "S = 0.5 * d1 * d2 * sin(A)" << endl;
-            cout << "S = 0.5 * " << fixed << d1 << " * " << fixed << d2 << " * sin(" << fixed << corner << ")" << endl;
-
             double sinCorner = sin(degreeToRadian(corner));
+            double result = Round((d1 * d2 * sinCorner) / 2);
 
-            cout << "S = 0.5 * " << fixed << d1 << " * " << fixed << d2 << " * " << fixed << sinCorner << endl;
+            string strD1 = RoundStr(d1);
+            string strD2 = RoundStr(d2);
 
-            double result = (d1 * d2 * sinCorner) / 2;
+            cout << "S = 0.5 * d1 * d2 * sin(A)" << endl;
+            cout << "S = 0.5 * " << fixed << strD1 << " * " << fixed << strD2 << " * sin(" << fixed << RoundStr(corner) << ")" << endl;
 
-            cout << "S = " << fixed << result << endl;
+            cout << "S = 0.5 * " << fixed << strD1 << " * " << fixed << strD2 << " * " << fixed << RoundStr(sinCorner) << endl;
+            cout << "S = " << fixed << RoundStr(result) << endl;
 
             return result;
         }
@@ -340,10 +348,13 @@ class Task16 {
                 height = myInput.InputData("Введите высоту параллелограмма: ", MIN, MAX);
             }
 
+            side = Round(side);
+            height = Round(height);
+
             SetConsoleTextAttribute(handleConsole, Yellow);
             cout << endl << "Полученные данные:" << endl;
-            cout << "Сторона параллелограмма (a): " << side << endl;
-            cout << "Высота параллелограмма: (h): " << height << endl << endl;
+            cout << "Сторона параллелограмма (a): " << RoundStr(side) << endl;
+            cout << "Высота параллелограмма: (h): " << RoundStr(height) << endl << endl;
 
             SetConsoleTextAttribute(handleConsole, Green);
             printSquare(side, height);
@@ -369,11 +380,15 @@ class Task16 {
                 corner = myInput.InputData("Введите угол между сторонами а и b (A) [в градусах]: ", MIN, 90);
             }
 
+            side1 = Round(side1);
+            side2 = Round(side2);
+            corner = Round(corner);
+
             SetConsoleTextAttribute(handleConsole, Yellow);
             cout << endl << "Полученные данные:" << endl;
-            cout << "Первая сторона параллелограмма (а): " << side1 << endl;
-            cout << "Вторая сторона параллелограмма (b): " << side2 << endl;
-            cout << "Угол между сторонами а и b (A) [в градусах]: " << corner << endl << endl;
+            cout << "Первая сторона параллелограмма (а): " << RoundStr(side1) << endl;
+            cout << "Вторая сторона параллелограмма (b): " << RoundStr(side2) << endl;
+            cout << "Угол между сторонами а и b (A) [в градусах]: " << RoundStr(corner) << endl << endl;
 
             SetConsoleTextAttribute(handleConsole, Green);
             printSquareCorner(side1, side2, corner);
@@ -399,11 +414,15 @@ class Task16 {
                 corner = myInput.InputData("Введите угол между диагоналями d1 и d2 (A): ", MIN, 180);
             }
 
+            d1 = Round(d1);
+            d2 = Round(d2);
+            corner = Round(corner);
+
             SetConsoleTextAttribute(handleConsole, Yellow);
             cout << endl << "Полученные данные:" << endl;
-            cout << "Первая диагональ параллелограмма (d1): " << d1 << endl;
-            cout << "Вторая диагональ параллелограмма (d2): " << d2 << endl;
-            cout << "Угол между диагоналями d1 и d2 (A): " << corner << endl << endl;
+            cout << "Первая диагональ параллелограмма (d1): " << RoundStr(d1) << endl;
+            cout << "Вторая диагональ параллелограмма (d2): " << RoundStr(d2) << endl;
+            cout << "Угол между диагоналями d1 и d2 (A): " << RoundStr(corner) << endl << endl;
 
             SetConsoleTextAttribute(handleConsole, Green);
             printSquareDiagonals(d1, d2, corner);
