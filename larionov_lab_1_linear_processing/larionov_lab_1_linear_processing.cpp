@@ -75,7 +75,7 @@ class MyInput {
     public: 
 
         bool isDouble(string str) {
-            return regex_match(str, regex("^[-]?[0-9]*?,?[0-9]"));
+            return regex_match(str, regex("^[-]?[0-9]*?,?[0-9]*"));
         }
 
         double InputData(string text, int min, int max, int defaultValue = -1) {
