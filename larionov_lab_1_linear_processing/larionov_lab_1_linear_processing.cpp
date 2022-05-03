@@ -2,13 +2,12 @@
 #include <Windows.h>
 #include <string>
 #include <stdlib.h>
-#include <cctype>
 #include <conio.h>
 #include <random>
 #include <algorithm>
 #include <iomanip>
-#include <cmath>
-//#include <regex>
+#include <regex>
+
 
 #define PI 3.14159265
 
@@ -76,26 +75,7 @@ class MyInput {
     public: 
 
         bool isDouble(string str) {
-            //regex_match(rgx("^[-+]?[0-9]*[,][0-9]"));
-
-            bool r1 = str.find_first_not_of("-1234567890,") == string::npos;
-
-            int c1 = count(str.begin(), str.end(), ',');
-            int c2 = count(str.begin(), str.end(), '-');
-
-            if (c1 == 0 && c2 == 0)
-                return r1;
-
-            if (c1 > 1 || c2 > 1)
-                return false;
-
-            if (c2 != 0 && str[0] != '-')
-                return false;
-
-            if (c1 != 0 && (str[0] == ',' || str[str.size() - 1] == ','))
-                return false;
-
-            return r1;
+            return regex_match(str, regex("^[-]?[0-9]*?,?[0-9]"));
         }
 
         double InputData(string text, int min, int max, int defaultValue = -1) {
@@ -150,7 +130,7 @@ class MyRandom {
 
             string answer = GetLine();
 
-            transform(answer.begin(), answer.end(), answer.begin(), tolower);
+            transform(answer.begin(), answer.end(), answer.begin(), ::tolower);
 
             return answer == "y" || answer == "";
         }
