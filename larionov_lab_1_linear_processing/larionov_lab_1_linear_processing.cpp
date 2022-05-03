@@ -1,11 +1,6 @@
 ﻿#include <iostream>
 #include <Windows.h>
-#include <string>
-#include <stdlib.h>
-#include <conio.h>
 #include <random>
-#include <algorithm>
-#include <iomanip>
 #include <regex>
 
 
