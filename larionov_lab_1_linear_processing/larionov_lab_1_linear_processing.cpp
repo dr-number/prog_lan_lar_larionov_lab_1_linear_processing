@@ -31,6 +31,46 @@ string GetLine() {
     return line;
 }
 
+string RoundStr(float var, int after = 2) {
+
+    string s = to_string(var);
+    int size = s.size();
+
+    string result = "";
+    bool isAfter = false;
+    int afterCount = 0;
+
+    for (int i = 0; i < size; ++i) {
+
+        if (afterCount == after)
+            break;
+
+        if (isAfter)
+            ++afterCount;
+
+        if (!isAfter && s[i] == ',')
+            isAfter = true;
+
+        result += s[i];
+
+    }
+
+    return result;
+}
+
+float Round(float var)
+{
+    // 37.66666 * 100 = 3766.66
+    // 3766.66 + .5 = 3767.16 для значения округления
+
+    // затем вводим тип int в значение 3767
+    // затем делим на 100, поэтому значение преобразуется в 37,67
+
+    float value = (int)(var * 100 + .5);
+    return stod(RoundStr((float)value / 100));
+
+}
+
 class MyInput {
 
     public: 
@@ -135,29 +175,31 @@ class MyRandom {
 class Task6 {
 
     private:
+        const int MIN = MyRandom::MIN_RANDOM;
+        const int MAX = MyRandom::MAX_RANDOM;
+
         double printVolume(double h, double r1, double r2) {
 
+            double square1 = Round(r1 * r1);
+            double square2 = Round(r2 * r2);
+
+            double differenceSquare = Round(square1 - square2);
+            double result = Round(PI * h * differenceSquare);
+
+            string strH = RoundStr(h);
+
             cout << "v = ПИ * h (r1^2 - r2^2)" << endl;
-            cout << "v = " << PI << " * " << h << " * (" << fixed << r1 <<"^2 - " << fixed << r2 << "^2)" << endl;
+            cout << "v = " << PI << " * " << strH << " * (" << fixed << RoundStr(r1) <<"^2 - " << fixed << RoundStr(r2) << "^2)" << endl;
 
-            double square1 = r1 * r1;
-            double square2 = r2 * r2;
+            cout << "v = " << PI << " * " << strH << " * (" << fixed << RoundStr(square1) << " - " << fixed << RoundStr(square2) << ")" << endl;
+            cout << "v = " << PI << " * " << fixed << strH << " * " << fixed << RoundStr(differenceSquare) << endl;
 
-            cout << "v = " << PI << " * " << h << " * (" << fixed << square1 << " - " << fixed << square2 << ")" << endl;
-
-            double differenceSquare = square1 - square2;
-            cout << "v = " << PI << " * " << fixed << h << " * " << fixed << differenceSquare << endl;
-
-            double result = PI * h * differenceSquare;
-            cout << "v = " << fixed << result << endl;
+            cout << "v = " << fixed << RoundStr(result) << endl;
             return result;
         }
 
 
     public:
-        const int MIN = MyRandom::MIN_RANDOM;
-        const int MAX = MyRandom::MAX_RANDOM;
-
         void Init() {
 
             HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -207,11 +249,15 @@ class Task6 {
               
             }
 
+            h = Round(h);
+            r1 = Round(r1);
+            r2 = Round(r2);
+
             SetConsoleTextAttribute(handleConsole, Yellow);
             cout << endl << "Полученные данные:" << endl;
-            cout << "Высота цилиндра (h): " << h << endl;
-            cout << "Внешний радиус цилиндра (r1): " << r1 << endl;
-            cout << "Внутренний радиус цилиндра (r2): " << r2 << endl << endl;
+            cout << "Высота цилиндра (h): " << RoundStr(h) << endl;
+            cout << "Внешний радиус цилиндра (r1): " << RoundStr(r1) << endl;
+            cout << "Внутренний радиус цилиндра (r2): " << RoundStr(r2) << endl << endl;
 
 
             SetConsoleTextAttribute(handleConsole, Green);
@@ -226,8 +272,10 @@ class Task6 {
 class Task16 {
 
     private:
-        double degreeToRadian(double degree) {
+        const int MIN = MyRandom::MIN_RANDOM;
+        const int MAX = MyRandom::MAX_RANDOM;
 
+        double degreeToRadian(double degree) {
             return (degree * PI) / 180;
         }
 
@@ -275,8 +323,6 @@ class Task16 {
         }
 
     public:
-        const int MIN = MyRandom::MIN_RANDOM;
-        const int MAX = MyRandom::MAX_RANDOM;
 
         void InitSideHeight() {
 
