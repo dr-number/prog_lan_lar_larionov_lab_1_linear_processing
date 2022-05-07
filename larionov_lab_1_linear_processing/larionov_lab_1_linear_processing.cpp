@@ -433,13 +433,12 @@ class Task16 {
                 }
                 else if (select == "3") {
                     InitSidesDiagonals();
-                    isGo = false;
+                    isGo = false;//
                 }
                 else {
                     SetConsoleTextAttribute(handleConsole, Red);
                     cout << "\nНекорректные данные!" << endl;
                     SetConsoleTextAttribute(handleConsole, White);
-                    break;
                 }
             }
         }
